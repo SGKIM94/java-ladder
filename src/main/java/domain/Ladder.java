@@ -9,6 +9,7 @@ public class Ladder {
     static final int NUMBER_FOR_MAKING_HORIZON = 1;
     public static final int MAKE_RANDOM_BOOLEAN_NUMBER = 2;
     public static final int TRUE_NUMBER = 1;
+    public static final int EDGE_OF_LADDER_HORIZON = 1;
 
     private List<Points> ladder;
 
@@ -85,7 +86,7 @@ public class Ladder {
             return;
         }
 
-        if (horizon == getHorizonSize() - 1) {
+        if (horizon == getHorizonSize() - EDGE_OF_LADDER_HORIZON) {
             ladderFormatter.append("|     |");
             return;
         }
