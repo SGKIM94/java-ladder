@@ -1,14 +1,17 @@
 package controller;
 
-import domain.Ladder;
+import domain.Participants;
 
 import static view.LadderFormat.printLadder;
+import static view.participantsFormat.printParticipants;
 
 public class LadderGame {
 
     public static void main(String names, int height) {
-        Ladder ladder = new Ladder(height, names);
+        domain.LadderGame ladderGame = new domain.LadderGame(height, names);
+        Participants participants = new Participants(names);
 
-        printLadder(ladder);
+        printParticipants(participants);
+        printLadder(ladderGame);
     }
 }
