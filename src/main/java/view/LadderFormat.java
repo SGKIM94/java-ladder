@@ -1,16 +1,16 @@
 package view;
 
-import domain.Ladder;
+import domain.LadderGame;
 
 public class LadderFormat {
     public static final int EDGE_OF_LADDER_HORIZON = 1;
 
-    public static void printLadder(Ladder ladder) {
-        int verticalSize = ladder.getVerticalSize();
+    public static void printLadder(LadderGame ladderGame) {
+        int verticalSize = ladderGame.getVerticalSize();
         StringBuilder ladderFormatter = new StringBuilder();
 
         for (int i = 0; i < verticalSize; i++) {
-            makeFormatForHorizon(ladder, ladderFormatter, i);
+            makeFormatForHorizon(ladderGame, ladderFormatter, i);
 
             ladderFormatter.append("\n");
         }
@@ -18,17 +18,17 @@ public class LadderFormat {
         System.out.println(ladderFormatter);
     }
 
-    private static void makeFormatForHorizon(Ladder ladder, StringBuilder ladderFormatter, int vertical) {
-        int horizonSize = ladder.getHorizonSize();
-        int verticalSize = ladder.getVerticalSize();
+    private static void makeFormatForHorizon(LadderGame ladderGame, StringBuilder ladderFormatter, int vertical) {
+        int horizonSize = ladderGame.getHorizonSize();
+        int verticalSize = ladderGame.getVerticalSize();
 
         for (int j = 0; j < horizonSize; j++) {
             if (j == (verticalSize - EDGE_OF_LADDER_HORIZON)) {
-                ladder.makeSteppingStoneForPrint(ladderFormatter, vertical, j, "|-----|");
+                ladderGame.makeSteppingStoneForPrint(ladderFormatter, vertical, j, "|");
                 continue;
             }
 
-            ladder.makeSteppingStoneForPrint(ladderFormatter, vertical, j, "|-----");
+            ladderGame.makeSteppingStoneForPrint(ladderFormatter, vertical, j, "|-----");
         }
     }
 }
