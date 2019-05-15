@@ -35,6 +35,10 @@ public class Participants {
         return this;
     }
 
+    public int getSize() {
+        return this.participants.size();
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
