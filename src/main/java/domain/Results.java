@@ -5,13 +5,14 @@ import java.util.List;
 
 public class Results {
     private static final String DELIMITER = ",";
+
     private List<String> results;
 
     public Results(String results) {
-        this.results = makeListFromArray(makeResult(results));
+        this.results = makeListFromArray(initializeResult(results));
     }
 
-    public String[] makeResult(String input) {
+    public String[] initializeResult(String input) {
         checkInputResultsIsNull(input);
 
         return input.split(DELIMITER);
@@ -33,6 +34,7 @@ public class Results {
         return Arrays.asList(array);
     }
 
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -42,5 +44,9 @@ public class Results {
         }
 
         return String.valueOf(stringBuilder);
+    }
+
+    public String getResult(int resultIndex) {
+        return this.results.get(resultIndex);
     }
 }
