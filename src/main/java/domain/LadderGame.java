@@ -63,17 +63,24 @@ public class LadderGame {
         return this.ladder.getLadderSize();
     }
 
-    public void makeSteppingStoneForPrint(StringBuilder ladderFormatter, int vertical, int horizon, String stone) {
+    public StringBuilder makeSteppingStoneForPrint(int vertical, int horizon, String stone) {
+        StringBuilder ladderFormatter = new StringBuilder();
+
         if (this.ladder.hasSteppingStone(vertical,horizon)) {
             ladderFormatter.append(stone);
-            return;
+            return ladderFormatter;
         }
 
         if (horizon == (getHorizonSize() - EDGE_OF_LADDER_HORIZON)) {
             ladderFormatter.append("|");
-            return;
+            return ladderFormatter;
         }
 
         ladderFormatter.append("|     ");
+        return ladderFormatter;
+    }
+
+    public Points getPoints(int verticalIndex) {
+        return this.ladder.get(verticalIndex);
     }
 }
