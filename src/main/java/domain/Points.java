@@ -3,10 +3,10 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import static domain.MovementGroup.*;
+
 public class Points {
-    public static final int POSSIBLE_INDEX_NUMBER = 0;
-    public static final int LEFT_STEPPING_STONE = 1;
-    public static final int FIRST_STEPPING_STONE = 1;
+
     List<Boolean> points;
 
     public Points(String horizon) {
@@ -23,7 +23,6 @@ public class Points {
             this.points.add(false);
         }
     }
-
 
     public Points add(boolean point) {
         this.points.add(point);
@@ -46,25 +45,29 @@ public class Points {
             return false;
         }
 
-        checkIndexBiggerThanOne(index);
-        return this.points.get(index - 1);
+        return this.points.get(index - MOVE_LEFT.getValue());
     }
 
+    public Boolean hasSteppingStoneWhereRight(int index) {
+        return this.points.get(index);
+    }
+
+
     private boolean isFirstSteppingStone(int index) {
-        if (index < FIRST_STEPPING_STONE) {
+        if (index < FIRST_STEPPING_STONE.getValue()) {
             return true;
         }
         return false;
     }
 
     public void checkIndexBiggerThanZero(int index) {
-        if (index < POSSIBLE_INDEX_NUMBER) {
+        if (index < POSSIBLE_INDEX_NUMBER.getValue()) {
             throw new IllegalArgumentException();
         }
     }
 
     public void checkIndexBiggerThanOne(int index) {
-        if (index - LEFT_STEPPING_STONE < POSSIBLE_INDEX_NUMBER) {
+        if (index - LEFT_STEPPING_STONE.getValue() < POSSIBLE_INDEX_NUMBER.getValue()) {
             throw new IllegalArgumentException();
         }
     }
