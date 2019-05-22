@@ -34,4 +34,15 @@ public class ParticipantsTest {
         assertThat(participants.toString().trim()).isEqualTo(String.valueOf(stringBuilder).trim());
     }
 
+    @Test
+    public void 입력받은_참가자의_index를_리턴한다() {
+        String name = "hye";
+        assertThat(participants.getParticipantIndex(name)).isEqualTo(0);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void 입력받은_참가자가_존재하지_않는경우_예외() {
+        String name = "part";
+        participants.getParticipantIndex(name);
+    }
 }
