@@ -29,12 +29,6 @@ public class Participants {
         }
     }
 
-    public Participants add(String name) {
-        this.participants.add(name);
-
-        return this;
-    }
-
     public int getSize() {
         return this.participants.size();
     }
@@ -48,5 +42,28 @@ public class Participants {
         }
 
         return String.valueOf(stringBuilder);
+    }
+
+    public int getParticipantIndex(String name) {
+        checkParticipantsHasTheName(name);
+
+        int participantsSize = getSize();
+        for (int i = 0; i < participantsSize; i++) {
+            if (get(i).equals(name)) {
+                return i;
+            }
+        }
+
+        throw new IllegalArgumentException();
+    }
+
+    private void checkParticipantsHasTheName(String name) {
+        if (!participants.contains(name)) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public String get(int index) {
+        return this.participants.get(index);
     }
 }
