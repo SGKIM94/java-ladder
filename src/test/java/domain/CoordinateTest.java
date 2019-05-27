@@ -10,19 +10,19 @@ public class CoordinateTest {
 
     @Test
     public void 왼쪽으로_이동() {
-        coordinate.moveLeft();
-        assertThat(coordinate.getX()).isEqualTo(2);
+        assertThat(coordinate.moveLeft().getX()).isEqualTo(2);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void X가_0일떄_왼쪽으로_이동한경우() {
-        coordinate.setX(0);
-        coordinate.moveLeft();
+        Coordinate zeroCoordinate = new Coordinate(0);
+        zeroCoordinate.moveLeft();
+
+        assertThat(zeroCoordinate.getX()).isEqualTo(0);
     }
 
     @Test
     public void 오른쪽으로_이동() {
-        coordinate.moveRight();
-        assertThat(coordinate.getX()).isEqualTo(4);
+        assertThat(coordinate.moveRight().getX()).isEqualTo(4);
     }
 }

@@ -1,7 +1,7 @@
 package domain;
 
 public class LadderGame {
-    public static final int MAKE_RANDOM_BOOLEAN_NUMBER = 2;
+    public static final double MAKE_RANDOM_BOOLEAN_NUMBER = 2;
     public static final int TRUE_NUMBER = 1;
     public static final int EDGE_OF_LADDER_HORIZON = 1;
 
@@ -36,19 +36,23 @@ public class LadderGame {
 
     private void makeHorizonLadder(int horizon, int vertical) {
         for (int j = 0; j < horizon; j++) {
-            putIfHavingPoint(vertical, j);
+            putIfExistLadder(vertical, j);
         }
     }
 
-    private void putIfHavingPoint(int vertical, int index) {
+    private void putIfExistLadder(int vertical, int index) {
         int random = (int)(Math.random() * MAKE_RANDOM_BOOLEAN_NUMBER);
 
-        if (random == TRUE_NUMBER) {
+        if (isLadderExist(random)) {
             Points points = this.ladder.get(vertical);
             points.set(index, true);
 
             points.deleteSteppingStoneWhenLeftHasSteppingStone(index);
         }
+    }
+
+    private boolean isLadderExist(int random) {
+        return random == TRUE_NUMBER;
     }
 
     private int parseInt(String vertical) {

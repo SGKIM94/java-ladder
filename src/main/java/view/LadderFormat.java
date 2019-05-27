@@ -3,7 +3,8 @@ package view;
 import domain.LadderGame;
 
 public class LadderFormat {
-    private static final int EDGE_OF_LADDER_HORIZON = 1;
+    public static final String LINE_BREAK = "\n";
+    public static final int EXCEPTION_START_INDEX = 1;
 
     public static void printLadder(LadderGame ladderGame) {
         int verticalSize = ladderGame.getVerticalSize();
@@ -12,11 +13,11 @@ public class LadderFormat {
         for (int i = 0; i < verticalSize; i++) {
             ladderFormatter.append(makeFormatForHorizon(ladderGame, i));
 
-            if (i == verticalSize - 1) {
+            if (isItTheFarRight(verticalSize, i)) {
                 continue;
             }
 
-            ladderFormatter.append("\n");
+            ladderFormatter.append(LINE_BREAK);
         }
 
         System.out.println(ladderFormatter);
@@ -28,7 +29,7 @@ public class LadderFormat {
         int verticalSize = ladderGame.getVerticalSize();
 
         for (int j = 0; j < horizonSize; j++) {
-            if (j == (verticalSize - EDGE_OF_LADDER_HORIZON)) {
+            if (isItTheFarRight(verticalSize, j)) {
                 ladderFormatter.append(ladderGame.makeSteppingStoneForPrint(vertical, j, "|"));
                 continue;
             }
@@ -37,5 +38,10 @@ public class LadderFormat {
         }
 
         return ladderFormatter;
+    }
+
+
+    private static boolean isItTheFarRight(int verticalSize, int index) {
+        return index == (verticalSize - EXCEPTION_START_INDEX);
     }
 }

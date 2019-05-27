@@ -61,15 +61,23 @@ public class Points {
     }
 
     public void checkIndexBiggerThanZero(int index) {
-        if (index < POSSIBLE_INDEX_NUMBER.getValue()) {
+        if (isLessThanPossibleIndexNumber(index)) {
             throw new IllegalArgumentException();
         }
     }
 
+    private boolean isLessThanPossibleIndexNumber(int index) {
+        return index < POSSIBLE_INDEX_NUMBER.getValue();
+    }
+
     public void checkIndexBiggerThanOne(int index) {
-        if (index - LEFT_STEPPING_STONE.getValue() < POSSIBLE_INDEX_NUMBER.getValue()) {
+        if (isMoreLeftEdgeStone(index)) {
             throw new IllegalArgumentException();
         }
+    }
+
+    private boolean isMoreLeftEdgeStone(int index) {
+        return index < POSSIBLE_INDEX_NUMBER.getValue() - LEFT_STEPPING_STONE.getValue();
     }
 
     public Points deleteSteppingStoneWhenLeftHasSteppingStone(int index) {

@@ -25,9 +25,13 @@ public class Results {
     }
 
     public void checkLengthWithParticipant(int length, int participantSize) {
-        if (length != participantSize) {
+        if (isNotParticipantSizeNotEqualTheLength(length, participantSize)) {
             throw new IllegalArgumentException();
         }
+    }
+
+    private boolean isNotParticipantSizeNotEqualTheLength(int length, int participantSize) {
+        return length != participantSize;
     }
 
     private List<String> makeListFromArray(String [] array) {
@@ -38,9 +42,10 @@ public class Results {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-
+        String resultFormat;
         for (String result : this.results) {
-            stringBuilder.append(result + "    ");
+            resultFormat = result + "    ";
+            stringBuilder.append(resultFormat);
         }
 
         return String.valueOf(stringBuilder);

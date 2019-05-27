@@ -36,9 +36,11 @@ public class Participants {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
+        String participantFormat;
 
         for (String participant : participants) {
-            stringBuilder.append(participant + "  ");
+            participantFormat = participant + "  ";
+            stringBuilder.append(participantFormat);
         }
 
         return String.valueOf(stringBuilder);

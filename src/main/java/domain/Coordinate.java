@@ -7,40 +7,28 @@ public class Coordinate {
     public static final int EDGE_OF_START = 0;
 
     private int x;
-    private int y;
 
     public Coordinate(int x) {
         this.x = x;
-        this.y = 0;
     }
 
     public Coordinate moveLeft() {
-        if (getX() == EDGE_OF_START) {
+        if (isXCoordinationEdgeOfStart()) {
            return this;
         }
 
-        setX(getX() - MOVE_LEFT.getValue());
-        return this;
+        return new Coordinate(this.x - MOVE_LEFT.getValue());
+    }
+
+    private boolean isXCoordinationEdgeOfStart() {
+        return this.x == EDGE_OF_START;
     }
 
     public Coordinate moveRight() {
-        setX(getX() + MOVE_RIGHT.getValue());
-        return this;
+        return new Coordinate(this.x + MOVE_RIGHT.getValue());
     }
 
     public int getX() {
         return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
     }
 }

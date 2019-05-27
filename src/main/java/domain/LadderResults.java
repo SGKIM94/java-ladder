@@ -1,5 +1,7 @@
 package domain;
 
+import static domain.MovementGroup.MOVE_LEFT;
+
 public class LadderResults {
     private Coordinate coordinate;
     private LadderSize ladderSize;
@@ -21,11 +23,15 @@ public class LadderResults {
     private void moveHorizonAsMakingResult(int startIndex, Points points) {
         moveLeftIfHasSteppingStone(points, startIndex);
 
-        if (startIndex == this.ladderSize.getHorizon() - 1) {
+        if (isStartIndexWhenMoveLeft(startIndex)) {
             return;
         }
 
         moveRightIfHasSteppingStone(points, startIndex);
+    }
+
+    private boolean isStartIndexWhenMoveLeft(int startIndex) {
+        return startIndex == (this.ladderSize.getHorizon() - MOVE_LEFT.getValue());
     }
 
     private void moveRightIfHasSteppingStone(Points points, int horizon) {
