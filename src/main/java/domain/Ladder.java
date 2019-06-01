@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ladder {
-    public static final int FIRST = 0;
     private List<Points> ladder;
 
     public Ladder() {
@@ -19,15 +18,12 @@ public class Ladder {
     public Points get(int index) {
         return this.ladder.get(index);
     }
-    public Boolean hasSteppingStone(int index, int horizon) {
-        return this.ladder.get(index).hasSteppingStone(horizon);
+
+    public Boolean hasSteppingStone(int verticalIndex, int horizonIndex) {
+        return this.ladder.get(verticalIndex).hasSteppingStone(horizonIndex);
     }
 
     public int getSize() {
         return this.ladder.size();
-    }
-
-    public int getLadderSize() {
-        return this.ladder.get(FIRST).getSize();
     }
 }

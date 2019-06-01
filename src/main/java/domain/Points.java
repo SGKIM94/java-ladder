@@ -34,10 +34,10 @@ public class Points {
         return this;
     }
 
-    public Boolean hasSteppingStone(int index) {
-        checkIndexBiggerThanZero(index);
+    public Boolean hasSteppingStone(int horizonIndex) {
+        checkIndexBiggerThanZero(horizonIndex);
 
-        return this.points.get(index);
+        return this.points.get(horizonIndex);
     }
 
     public Boolean hasSteppingStoneWhereLeft(int index) {

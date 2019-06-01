@@ -7,5 +7,4 @@ public class InputResultFormat {
         System.out.print(inputResult + " : ");
         System.out.println(result.getResult(resultIndex));
     }
-
 }
