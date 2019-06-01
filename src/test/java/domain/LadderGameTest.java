@@ -10,17 +10,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class LadderGameTest {
-    static final int VERTICAL = 4;
+    static final Level LEVEL = new Level("상");
+    static final int VERTICAL = LEVEL.getVerticalByLevel();
     static final int HORIZON = 4;
     static final String NAMES = "kim,choi,pack,lee";
     static final int ADD_INDEX = 1;
+    public static final int HIGH_LEVEL_PROBABILITY = 2;
+    public static final int HIGH_LEVEL_VERTICAL = 20;
     final Points points = new Points("4");
-    final LadderGame ladderGame = new LadderGame(VERTICAL, NAMES);
-
-    @Test
-    public void 참여자_길이_테스트() {
-        assertThat(ladderGame.getHorizonLength(NAMES)).isEqualTo(HORIZON);
-    }
+    static final LadderSize LADDERSIZE = new LadderSize(VERTICAL, HORIZON);
+    final LadderGame ladderGame = new LadderGame(LADDERSIZE, LEVEL);
 
     @Test
     public void 사다리_세로축_생성_테스트() {
@@ -53,8 +52,6 @@ public class LadderGameTest {
 
     @Test
     public void 사다리의_행_개수가_정상적으로_생성되는지_테스트() {
-        LadderGame ladderGame = new LadderGame(VERTICAL, NAMES);
-
         assertThat(ladderGame.getHorizonSize() * ladderGame.getVerticalSize()).isEqualTo(VERTICAL * HORIZON);
     }
 
@@ -68,5 +65,20 @@ public class LadderGameTest {
 
         assertThat(points.getSize()).isEqualTo(4);
         assertThat(points.get(1)).isEqualTo(false);
+    }
+
+    @Test
+    public void 상_난이도를_입력한경우_3의_확률을_리턴한다() {
+        assertThat(ladderGame.makeProbability(LEVEL)).isEqualTo(HIGH_LEVEL_PROBABILITY);
+    }
+
+    @Test
+    public void getVerticalSizeTest() {
+        assertThat(ladderGame.getVerticalSize()).isEqualTo(HIGH_LEVEL_VERTICAL);
+    }
+
+    @Test
+    public void getHorizonSizeTest() {
+        assertThat(ladderGame.getHorizonSize()).isEqualTo(HORIZON);
     }
 }
