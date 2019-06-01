@@ -3,6 +3,7 @@ package domain;
 import static domain.MovementGroup.MOVE_LEFT;
 
 public class LadderResults {
+    public static final int ONE_DIFFERENCE_BETWEEN_INDEX_AND_SIZE = 1;
     private Coordinate coordinate;
     private LadderSize ladderSize;
 
@@ -45,7 +46,7 @@ public class LadderResults {
     }
 
     private boolean isMoreThanMaxHorizon(int horizon) {
-        return horizon >= this.ladderSize.getHorizon();
+        return horizon >= this.ladderSize.getHorizon() - ONE_DIFFERENCE_BETWEEN_INDEX_AND_SIZE;
     }
 
     private void moveLeftIfHasSteppingStone(Points points, int horizon) {
