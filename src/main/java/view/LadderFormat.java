@@ -23,25 +23,24 @@ public class LadderFormat {
         System.out.println(ladderFormatter);
     }
 
-    private static StringBuilder makeFormatForHorizon(LadderGame ladderGame, int vertical) {
+    private static StringBuilder makeFormatForHorizon(LadderGame ladderGame, int verticalIndex) {
         StringBuilder ladderFormatter = new StringBuilder();
         int horizonSize = ladderGame.getHorizonSize();
-        int verticalSize = ladderGame.getVerticalSize();
 
         for (int j = 0; j < horizonSize; j++) {
-            if (isItTheFarRight(verticalSize, j)) {
-                ladderFormatter.append(ladderGame.makeSteppingStoneForPrint(vertical, j, "|"));
+            if (isItTheFarRight(horizonSize, j)) {
+                ladderFormatter.append(ladderGame.makeSteppingStoneForPrint(verticalIndex, j, "|"));
                 continue;
             }
 
-            ladderFormatter.append(ladderGame.makeSteppingStoneForPrint(vertical, j, "|-----"));
+            ladderFormatter.append(ladderGame.makeSteppingStoneForPrint(verticalIndex, j, "|-----"));
         }
 
         return ladderFormatter;
     }
 
 
-    private static boolean isItTheFarRight(int verticalSize, int index) {
-        return index == (verticalSize - EXCEPTION_START_INDEX);
+    public  static boolean isItTheFarRight(int horizonSize, int horizonIndex) {
+        return horizonIndex == (horizonSize - EXCEPTION_START_INDEX);
     }
 }

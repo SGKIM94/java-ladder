@@ -1,28 +1,26 @@
 package domain;
 
+import static domain.LevelGroup.getProbability;
+import static domain.LevelGroup.getVertical;
+
 public class LadderGame {
-    public static final double MAKE_RANDOM_BOOLEAN_NUMBER = 2;
     public static final int TRUE_NUMBER = 1;
     public static final int EDGE_OF_LADDER_HORIZON = 1;
+    public static final int FIRST_INDEX = 0;
 
     private Ladder ladder;
-    private Participants participants;
+    private Level level;
 
-    public LadderGame(int vertical, String names) {
-        this(String.valueOf(vertical), names);
-    }
-
-    public LadderGame(String vertical, String names) {
+    public LadderGame(LadderSize ladderSize, Level level) {
         this.ladder = new Ladder();
-        this.participants = new Participants(names);
-        this.ladder = makeLadder(parseInt(vertical), getHorizonLength(names));
+        this.level = level;
+        this.ladder = makeLadder(ladderSize);
     }
 
-    public int getHorizonLength(String input) {
-        return this.participants.separatorNames(input).length;
-    }
+    public Ladder makeLadder(LadderSize ladderSize) {
+        int vertical = ladderSize.getVertical();
+        int horizon = ladderSize.getHorizon();
 
-    public Ladder makeLadder(int vertical, int horizon) {
         for (int i = 0; i < vertical; i++) {
             this.ladder.add(new Points(horizon));
         }
@@ -34,20 +32,20 @@ public class LadderGame {
         return this.ladder;
     }
 
-    private void makeHorizonLadder(int horizon, int vertical) {
+    private void makeHorizonLadder(int horizon, int verticalIndex) {
         for (int j = 0; j < horizon; j++) {
-            putIfExistLadder(vertical, j);
+            putIfExistLadder(verticalIndex, j);
         }
     }
 
-    private void putIfExistLadder(int vertical, int index) {
-        int random = (int)(Math.random() * MAKE_RANDOM_BOOLEAN_NUMBER);
+    private void putIfExistLadder(int verticalIndex, int horizonIndex) {
+        int random = (int)(Math.random() * makeProbability(this.level));
 
         if (isLadderExist(random)) {
-            Points points = this.ladder.get(vertical);
-            points.set(index, true);
+            Points points = this.ladder.get(verticalIndex);
+            points.set(horizonIndex, true);
 
-            points.deleteSteppingStoneWhenLeftHasSteppingStone(index);
+            points.deleteSteppingStoneWhenLeftHasSteppingStone(horizonIndex);
         }
     }
 
@@ -55,27 +53,23 @@ public class LadderGame {
         return random == TRUE_NUMBER;
     }
 
-    private int parseInt(String vertical) {
-        return Integer.parseInt(vertical);
-    }
-
     public int getHorizonSize(){
-        return this.ladder.getSize();
+        return this.ladder.get(FIRST_INDEX).getSize();
     }
 
     public int getVerticalSize() {
-        return this.ladder.getLadderSize();
+        return getVertical(this.level);
     }
 
-    public StringBuilder makeSteppingStoneForPrint(int vertical, int horizon, String stone) {
+    public StringBuilder makeSteppingStoneForPrint(int verticalIndex, int horizonIndex, String stone) {
         StringBuilder ladderFormatter = new StringBuilder();
 
-        if (this.ladder.hasSteppingStone(vertical,horizon)) {
+        if (this.ladder.hasSteppingStone(verticalIndex, horizonIndex)) {
             ladderFormatter.append(stone);
             return ladderFormatter;
         }
 
-        if (horizon == (getHorizonSize() - EDGE_OF_LADDER_HORIZON)) {
+        if (horizonIndex == (getHorizonSize() - EDGE_OF_LADDER_HORIZON)) {
             ladderFormatter.append("|");
             return ladderFormatter;
         }
@@ -86,5 +80,9 @@ public class LadderGame {
 
     public Points getPoints(int verticalIndex) {
         return this.ladder.get(verticalIndex);
+    }
+
+    public int makeProbability(Level level) {
+        return getProbability(level);
     }
 }
