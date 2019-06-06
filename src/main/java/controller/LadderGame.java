@@ -54,7 +54,7 @@ public class LadderGame {
         // 모든 참가자의 결과를 출력한다
         //*************************************************
         if (SHOW_ALL_RESULTS.equals(wantToShowResult)) {
-            showAllResult(ladderGame, participants, results, ladderSize);
+            ladderGame.showAllResult(participants, results, ladderSize);
             return;
         }
 
@@ -64,19 +64,5 @@ public class LadderGame {
         int resultIndex = new LadderResults(participants.getParticipantIndex(wantToShowResult), ladderSize)
                             .makeResult(ladderGame);
         printInputResult(results, resultIndex, wantToShowResult);
-    }
-
-    /**
-     * 모든 참가자의 결과를 출력한다
-     * @param ladderGame
-     * @param participants
-     * @param results
-     * @param ladderSize
-     */
-    private static void showAllResult(domain.LadderGame ladderGame, Participants participants, Results results, LadderSize ladderSize) {
-        int horizonSize = ladderSize.getHorizon();
-        for (int i = 0; i < horizonSize; i++) {
-            printInputResult(results, new LadderResults(i, ladderSize).makeResult(ladderGame), participants.get(i));
-        }
     }
 }

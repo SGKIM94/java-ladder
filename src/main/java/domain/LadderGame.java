@@ -1,13 +1,11 @@
 package domain;
 
+import static domain.EdgeNumberGroup.*;
 import static domain.LevelGroup.getProbability;
 import static domain.LevelGroup.getVertical;
+import static view.InputResultFormat.printInputResult;
 
 public class LadderGame {
-    public static final int TRUE_NUMBER = 1;
-    public static final int EDGE_OF_LADDER_HORIZON = 1;
-    public static final int FIRST_INDEX = 0;
-
     private Ladder ladder;
     private Level level;
 
@@ -50,11 +48,11 @@ public class LadderGame {
     }
 
     private boolean isLadderExist(int random) {
-        return random == TRUE_NUMBER;
+        return random == TRUE_NUMBER.getNumber();
     }
 
     public int getHorizonSize(){
-        return this.ladder.get(FIRST_INDEX).getSize();
+        return this.ladder.get(FIRST_INDEX.getNumber()).getSize();
     }
 
     public int getVerticalSize() {
@@ -69,13 +67,26 @@ public class LadderGame {
             return ladderFormatter;
         }
 
-        if (horizonIndex == (getHorizonSize() - EDGE_OF_LADDER_HORIZON)) {
+        if (horizonIndex == (getHorizonSize() - EDGE_OF_LADDER_HORIZON.getNumber())) {
             ladderFormatter.append("|");
             return ladderFormatter;
         }
 
         ladderFormatter.append("|     ");
         return ladderFormatter;
+    }
+
+    /**
+     * 모든 참가자의 결과를 출력한다
+     * @param participants
+     * @param results
+     * @param ladderSize
+     */
+    public void showAllResult(Participants participants, Results results, LadderSize ladderSize) {
+        int horizonSize = ladderSize.getHorizon();
+        for (int i = 0; i < horizonSize; i++) {
+            printInputResult(results, new LadderResults(i, ladderSize).makeResult(this), participants.getParticipant(i));
+        }
     }
 
     public Points getPoints(int verticalIndex) {
