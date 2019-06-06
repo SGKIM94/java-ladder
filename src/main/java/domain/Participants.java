@@ -3,19 +3,22 @@ package domain;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Participants {
-    private List<String> participants;
+    private List<Participant> participants;
 
     public Participants(String names) {
-        this.participants = setParticipant(names);
+        this.participants = new ArrayList<>();
+        setParticipants(names);
     }
 
-    public ArrayList<String> setParticipant(String input) {
+    public void setParticipants(String input) {
         String [] names = separatorNames(input);
-        return new ArrayList<>(Arrays.asList(names));
+
+        for (String name : names) {
+            this.participants.add(new Participant(name));
+        }
     }
 
     public String[] separatorNames(String input) {
@@ -38,8 +41,8 @@ public class Participants {
         StringBuilder stringBuilder = new StringBuilder();
         String participantFormat;
 
-        for (String participant : participants) {
-            participantFormat = participant + "  ";
+        for (Participant participant : participants) {
+            participantFormat = participant.getNameFormat();
             stringBuilder.append(participantFormat);
         }
 
@@ -51,21 +54,29 @@ public class Participants {
 
         int participantsSize = getSize();
         for (int i = 0; i < participantsSize; i++) {
-            if (get(i).equals(name)) {
+            if (getParticipant(i).equals(name)) {
                 return i;
             }
         }
-
         throw new IllegalArgumentException();
     }
 
     private void checkParticipantsHasTheName(String name) {
-        if (!participants.contains(name)) {
+        if (!contains(name)) {
             throw new IllegalArgumentException();
         }
     }
 
-    public String get(int index) {
-        return this.participants.get(index);
+    public String getParticipant(int index) {
+        return this.participants.get(index).getName();
+    }
+
+    public boolean contains(String name) {
+        for (Participant participant : participants) {
+            if (participant.equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

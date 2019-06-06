@@ -45,4 +45,9 @@ public class ParticipantsTest {
         String name = "part";
         participants.getParticipantIndex(name);
     }
+
+    @Test
+    public void contains_test() {
+        assertThat(participants.contains("jun")).isEqualTo(true);
+    }
 }
